@@ -1,0 +1,84 @@
+<mxfile host="app.diagrams.net">
+    <diagram name="Architecture Diagram">
+        <mxGraphModel dx="602" dy="234" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0" />
+                <mxCell id="1" parent="0" />
+
+                <!-- Databases -->
+                <mxCell id="databases" value="Databases" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="40" y="20" width="240" height="100" as="geometry" />
+                </mxCell>
+                <mxCell id="psql" value="PostgreSQL" style="shape=ellipse;fillColor=#d6e4ff;" vertex="1" parent="databases">
+                    <mxGeometry x="20" y="20" width="100" height="50" as="geometry" />
+                </mxCell>
+                <mxCell id="mongodb" value="MongoDB" style="shape=ellipse;fillColor=#d6e4ff;" vertex="1" parent="databases">
+                    <mxGeometry x="120" y="20" width="100" height="50" as="geometry" />
+                </mxCell>
+
+                <!-- Services -->
+                <mxCell id="services" value="Services" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="40" y="140" width="800" height="680" as="geometry" />
+                </mxCell>
+
+                <!-- Auth Service -->
+                <mxCell id="authService" value="Auth Service" style="rounded=1;fillColor=#ffcc99;" vertex="1" parent="services">
+                    <mxGeometry x="20" y="20" width="150" height="80" as="geometry" />
+                </mxCell>
+
+                <!-- Payments Service -->
+                <mxCell id="paymentsService" value="Payments Service" style="rounded=1;fillColor=#ff99cc;" vertex="1" parent="services">
+                    <mxGeometry x="200" y="20" width="150" height="80" as="geometry" />
+                </mxCell>
+
+                <!-- Company Service -->
+                <mxCell id="companyService" value="Company Service" style="rounded=1;fillColor=#99ccff;" vertex="1" parent="services">
+                    <mxGeometry x="20" y="120" width="150" height="80" as="geometry" />
+                </mxCell>
+
+                <!-- Manager Service -->
+                <mxCell id="managerService" value="Manager Service" style="rounded=1;fillColor=#ccffcc;" vertex="1" parent="services">
+                    <mxGeometry x="200" y="120" width="150" height="80" as="geometry" />
+                </mxCell>
+
+                <!-- Tickets Service -->
+                <mxCell id="ticketsService" value="Tickets Service" style="rounded=1;fillColor=#ffccff;" vertex="1" parent="services">
+                    <mxGeometry x="20" y="220" width="150" height="80" as="geometry" />
+                </mxCell>
+
+                <!-- Admin App -->
+                <mxCell id="adminApp" value="Admin App" style="rounded=1;fillColor=#ccccff;" vertex="1" parent="services">
+                    <mxGeometry x="200" y="220" width="150" height="80" as="geometry" />
+                </mxCell>
+
+                <!-- Verification Service -->
+                <mxCell id="verificationService" value="Verification Service" style="rounded=1;fillColor=#ccff99;" vertex="1" parent="services">
+                    <mxGeometry x="20" y="320" width="150" height="80" as="geometry" />
+                </mxCell>
+
+                <!-- Support Service -->
+                <mxCell id="supportService" value="Support Service" style="rounded=1;fillColor=#ffcccc;" vertex="1" parent="services">
+                    <mxGeometry x="200" y="320" width="150" height="80" as="geometry" />
+                </mxCell>
+
+                <!-- Statistic Service -->
+                <mxCell id="statisticService" value="Statistic Service" style="rounded=1;fillColor=#ffcc99;" vertex="1" parent="services">
+                    <mxGeometry x="20" y="420" width="150" height="80" as="geometry" />
+                </mxCell>
+
+                <!-- Connections -->
+                <mxCell id="authServiceToDB" edge="1" parent="services" source="authService" target="psql" />
+                <mxCell id="paymentsServiceToDB" edge="1" parent="services" source="paymentsService" target="psql" />
+                <mxCell id="companyServiceToDB" edge="1" parent="services" source="companyService" target="psql" />
+                <mxCell id="companyServiceToMongoDB" edge="1" parent="services" source="companyService" target="mongodb" />
+                <mxCell id="managerServiceToDB" edge="1" parent="services" source="managerService" target="psql" />
+                <mxCell id="ticketsServiceToDB" edge="1" parent="services" source="ticketsService" target="psql" />
+                <mxCell id="ticketsServiceToMongoDB" edge="1" parent="services" source="ticketsService" target="mongodb" />
+                <mxCell id="adminAppToServices" edge="1" parent="services" source="adminApp" target="statisticService" />
+                <mxCell id="verificationServiceToDB" edge="1" parent="services" source="verificationService" target="psql" />
+                <mxCell id="supportServiceToMongoDB" edge="1" parent="services" source="supportService" target="mongodb" />
+                <mxCell id="statisticServiceToDB" edge="1" parent="services" source="statisticService" target="psql" />
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
+  <diagram name="Sequence Diagram" id="0">
+    <mxGraphModel dx="1078" dy="684" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="client" value="Client" style="shape=umlActor;verticalLabelPosition=middle;verticalAlign=middle;align=center;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="200" width="30" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="authService" value="Auth Service" style="rounded=1;fillColor=#ffcc99;" parent="1" vertex="1">
+          <mxGeometry x="155" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="companyService" value="Company Service" style="rounded=1;fillColor=#99ccff;" parent="1" vertex="1">
+          <mxGeometry x="270" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="verificationService" value="Verification Service" style="shape=rect;rounded=1;fillColor=#ccff99;" parent="1" vertex="1">
+          <mxGeometry x="460" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="managerService" value="Manager Service" style="rounded=1;fillColor=#ccffcc;" parent="1" vertex="1">
+          <mxGeometry x="190" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ticketsService" value="Tickets Service" style="rounded=1;fillColor=#ffccff;" parent="1" vertex="1">
+          <mxGeometry x="450" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="paymentsService" value="Payments Service" style="rounded=1;fillColor=#ff99cc;" parent="1" vertex="1">
+          <mxGeometry x="670" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="supportService" value="Support Service" style="rounded=1;fillColor=#ffcccc;" parent="1" vertex="1">
+          <mxGeometry x="80" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="statisticService" value="Statistic Service" style="rounded=1;fillColor=#ffcc99;" parent="1" vertex="1">
+          <mxGeometry y="207.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="adminService" value="Admin Service" style="rounded=1;fillColor=#ccccff;" parent="1" vertex="1">
+          <mxGeometry y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1-2" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="client" target="authService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2-3" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="authService" target="client" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3-4" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="client" target="companyService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4-5" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="companyService" target="verificationService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5-6" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="verificationService" target="companyService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6-7" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="client" target="managerService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7-8" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="managerService" target="ticketsService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8-9" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ticketsService" target="paymentsService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9-10" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="paymentsService" target="ticketsService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="10-11" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ticketsService" target="managerService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="11-12" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="managerService" target="client" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="12-13" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="client" target="supportService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="13-14" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="supportService" target="adminService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="14-15" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="client" target="statisticService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="15-16" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="adminService" target="statisticService" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

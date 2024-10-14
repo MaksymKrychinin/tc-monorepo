@@ -1,0 +1,70 @@
+<architecture>
+    <databases>
+        <database type="relational" name="PostgreSQL" />
+        <database type="document" name="MongoDB" />
+    </databases>
+
+    <services>
+        <service name="Auth Service" framework="NestJS">
+            <database>PostgreSQL</database>
+            <communication>REST API</communication>
+            <auth method="JWT" />
+            <future-auth method="Google Auth" />
+        </service>
+
+        <service name="Payments Service" framework="Spring Framework">
+            <database>PostgreSQL</database>
+            <communication>REST API</communication>
+            <features>
+                <feature name="subscriptions" />
+            </features>
+        </service>
+
+        <service name="Company Service" framework="NestJS">
+            <databases>
+                <database>PostgreSQL</database>
+                <database>MongoDB (for documents)</database>
+            </databases>
+            <communication>GraphQL</communication>
+        </service>
+
+        <service name="Manager Service" framework="NestJS">
+            <database>PostgreSQL</database>
+            <communication>REST API</communication>
+        </service>
+
+        <service name="Tickets Service" framework="NestJS">
+            <databases>
+                <database>PostgreSQL</database>
+                <database>MongoDB (for human documents)</database>
+            </databases>
+            <communication>REST API</communication>
+        </service>
+
+        <service name="Admin App" framework="Angular">
+            <communication>GraphQL</communication>
+        </service>
+
+        <service name="Verification Service" framework="NestJS">
+            <database>PostgreSQL</database>
+            <communication>REST API</communication>
+            <verifications>
+                <type method="email" mode="automated" />
+                <type method="documents" mode="manual" />
+            </verifications>
+        </service>
+
+        <service name="Support Service" framework="NestJS">
+            <database>MongoDB</database>
+            <communication>
+                <method>REST API</method>
+                <method>RabbitMQ (for live chat)</method>
+            </communication>
+        </service>
+
+        <service name="Statistic Service" framework="NestJS">
+            <database>PostgreSQL</database>
+            <communication>GraphQL</communication>
+        </service>
+    </services>
+</architecture>
