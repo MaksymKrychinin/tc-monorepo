@@ -1,0 +1,107 @@
+### Documentation
+
+#### Database
+- **PostgreSQL**: Used for relational data such as tickets and users.
+- **MongoDB**: Used for flexible schema data such as chat logs.
+
+#### Back-End Frameworks
+- **NestJS**: Used for the majority of services due to its flexibility and easy integration with GraphQL.
+- **Spring Framework**: Used for the Payments service due to its robust transaction management.
+
+#### Front-End Frameworks
+- **Admin App**: Angular with PrimeNG.
+- **Client App**: Angular with PrimeNG.
+
+#### Communication
+- **REST APIs**: Used for simpler, clear communication between services.
+- **GraphQL**: Used for data-heavy querying, especially combined with Angular Apollo for reactive front-end.
+- **Message Broker (RabbitMQ)**: Used for decoupled communication and ensuring smooth operations (e.g., for handling chat messages and notifications).
+
+#### High-Level Architecture
+- **Client -> Validation Layer -> Business Logic Layer -> DAO Layer**
+
+#### Service Mapping
+- **Auth Service**
+  - **Framework**: NestJS
+  - **Database**: PostgreSQL
+  - **Communication**: REST API
+  - **Features**: JWT with refresh tokens and future Google Auth integration
+
+- **Payments Service**
+  - **Framework**: Spring Framework
+  - **Database**: PostgreSQL
+  - **Communication**: REST API
+  - **Features**: Supports subscriptions
+
+- **Company Service**
+  - **Framework**: NestJS
+  - **Database**: PostgreSQL for company data, MongoDB for documents
+  - **Communication**: GraphQL
+
+- **Manager Service**
+  - **Framework**: NestJS
+  - **Database**: PostgreSQL
+  - **Communication**: REST API
+
+- **Tickets Service**
+  - **Framework**: NestJS
+  - **Database**: PostgreSQL for tickets, MongoDB for human documents
+  - **Communication**: REST API
+
+- **Admin App**
+  - **Framework**: Angular + PrimeNG
+  - **Communication**: GraphQL for reactive data querying
+
+- **Verification Service**
+  - **Framework**: NestJS
+  - **Database**: PostgreSQL
+  - **Communication**: REST API
+  - **Features**: Automated email verifications, manual document verifications
+
+- **Support Service**
+  - **Framework**: NestJS
+  - **Database**: MongoDB for chat logs
+  - **Communication**: REST API and RabbitMQ for live chat
+
+- **Statistic Service**
+  - **Framework**: NestJS
+  - **Database**: PostgreSQL for structured data
+  - **Communication**: GraphQL for interactive querying
+
+#### Entities
+- Client
+- Auth Service
+- Company Service
+- Manager Service
+- Tickets Service
+- Payments Service
+- Verification Service
+- Support Service
+- Admin Service
+- Statistic Service
+
+#### Sequence
+1. **Client -> AuthService**: Request Authentication
+2. **AuthService -> Client**: Return Token
+3. **Manager (Client) -> CompanyService**: Create Company Profile (+Documents)
+4. **CompanyService -> VerificationService**: Verify Documents
+5. **VerificationService -> CompanyService**: Verification Result
+6. **Manager (Client) -> ManagerService**: Create Ticket
+7. **ManagerService -> TicketsService**: Create Ticket Entry
+8. **TicketsService -> PaymentsService**: Process Payment
+9. **PaymentsService -> TicketsService**: Confirm Payment
+10. **TicketsService -> ManagerService**: Ticket Creation Confirmation
+11. **ManagerService -> Manager (Client)**: Ticket Created
+12. **Client -> SupportService**: Chat for Support
+13. **SupportService -> MongoDB**: Save Chat Logs
+14. **Admin (Client) -> StatisticService**: Request Statistics
+15. **StatisticService -> Admin (Client)**: Provide Statistics
+
+#### Middleware
+- **Authentication and Authorization**: Middleware for validation.
+
+#### DTOs and Pipes
+- **Input Validation**: DTOs and Pipes for input validation.
+
+#### Service Layer
+- **Business Rule Validation**: Service Layer for business rule validation.
