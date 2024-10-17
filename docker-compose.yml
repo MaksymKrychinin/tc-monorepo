@@ -1,0 +1,134 @@
+version: '3.8'
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth-service
+      - user-service
+
+  config-server:
+    build: ./config-server
+    ports:
+      - "8888:8888"
+
+  service-discovery:
+    build: ./service-discovery
+    ports:
+      - "8761:8761"
+
+  auth-service:
+    build: ./microservices/auth-service
+    ports:
+      - "8081:8081"
+    environment:
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - EUREKA_SERVER_URI=http://service-discovery:8761/eureka
+
+  user-service:
+    build: ./microservices/user-service
+    ports:
+      - "8082:8082"
+    environment:
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - EUREKA_SERVER_URI=http://service-discovery:8761/eureka
+
+  company-service:
+    build: ./microservices/company-service
+    ports:
+      - "8083:8083"
+    environment:
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - EUREKA_SERVER_URI=http://service-discovery:8761/eureka
+
+  manager-service:
+    build: ./microservices/manager-service
+    ports:
+      - "8084:8084"
+    environment:
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - EUREKA_SERVER_URI=http://service-discovery:8761/eureka
+
+  payments-service:
+    build: ./microservices/payments-service
+    ports:
+      - "8085:8085"
+    environment:
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - EUREKA_SERVER_URI=http://service-discovery:8761/eureka
+
+  statistic-service:
+    build: ./microservices/statistic-service
+    ports:
+      - "8086:8086"
+    environment:
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - EUREKA_SERVER_URI=http://service-discovery:8761/eureka
+
+  support-service:
+    build: ./microservices/support-service
+    ports:
+      - "8087:8087"
+    environment:
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - EUREKA_SERVER_URI=http://service-discovery:8761/eureka
+
+  tickets-service:
+    build: ./microservices/tickets-service
+    ports:
+      - "8088:8088"
+    environment:
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - EUREKA_SERVER_URI=http://service-discovery:8761/eureka
+
+  verification-service:
+    build: ./microservices/verification-service
+    ports:
+      - "8089:8089"
+    environment:
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - EUREKA_SERVER_URI=http://service-discovery:8761/eureka
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./databases/mongodb:/data/db
+
+  postgresql:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - ./databases/postgresql:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./message-broker/rabbitmq:/var/lib/rabbitmq
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  grafana-storage:
