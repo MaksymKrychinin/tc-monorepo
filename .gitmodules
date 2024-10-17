@@ -1,3 +1,21 @@
 [submodule "backend-services/microservices/auth-service"]
 	path = backend-services/microservices/auth-service
 	url = https://github.com/MaksymKrychinin/tc-auth-service.git
+[submodule "backend-services/microservices/company-service"]
+	path = backend-services/microservices/company-service
+	url = https://github.com/MaksymKrychinin/tc-company-service.git
+[submodule "backend-services/microservices/manager-service"]
+	path = backend-services/microservices/manager-service
+	url = https://github.com/MaksymKrychinin/tc-manager-service.git
+[submodule "backend-services/microservices/statistic-service"]
+	path = backend-services/microservices/statistic-service
+	url = https://github.com/MaksymKrychinin/tc-statistic-service.git
+[submodule "backend-services/microservices/support-service"]
+	path = backend-services/microservices/support-service
+	url = https://github.com/MaksymKrychinin/tc-support-service.git
+[submodule "backend-services/microservices/tickets-service"]
+	path = backend-services/microservices/tickets-service
+	url = https://github.com/MaksymKrychinin/tc-tickets-service.git
+[submodule "backend-services/microservices/verification-service"]
+	path = backend-services/microservices/verification-service
+	url = https://github.com/MaksymKrychinin/tc-verification-service.git
