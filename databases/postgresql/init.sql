@@ -1,63 +1,55 @@
--- Create users table
+-- Create the 'users' table
 CREATE TABLE users (
                        id SERIAL PRIMARY KEY,
-                       username VARCHAR(50) NOT NULL,
-                       email VARCHAR(100) NOT NULL,
-                       password VARCHAR(100) NOT NULL,
-                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                       username VARCHAR(255) UNIQUE NOT NULL,
+                       password_hash TEXT NOT NULL,
+                       email VARCHAR(255) UNIQUE NOT NULL,
+                       role VARCHAR(50) NOT NULL,
+                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert sample data into users table
-INSERT INTO users (username, email, password) VALUES ('john_doe', 'john@example.com', 'password123');
-INSERT INTO users (username, email, password) VALUES ('jane_doe', 'jane@example.com', 'password123');
-
--- Create companies table
-CREATE TABLE companies (
-                           id SERIAL PRIMARY KEY,
-                           name VARCHAR(100) NOT NULL,
-                           document JSONB,
-                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- Create the 'roles' table
+CREATE TABLE roles (
+                       id SERIAL PRIMARY KEY,
+                       role_name VARCHAR(50) UNIQUE NOT NULL
 );
 
--- Insert sample data into companies table
-INSERT INTO companies (name, document) VALUES ('Company A', '{"docType": "pdf", "docName": "companyA.pdf"}');
-INSERT INTO companies (name, document) VALUES ('Company B', '{"docType": "pdf", "docName": "companyB.pdf"}');
+-- Insert default roles
+INSERT INTO roles (role_name) VALUES ('User');
+INSERT INTO roles (role_name) VALUES ('Manager');
+INSERT INTO roles (role_name) VALUES ('Support');
+INSERT INTO roles (role_name) VALUES ('Admin');
+INSERT INTO roles (role_name) VALUES ('SuperAdmin');
 
--- Create tickets table
-CREATE TABLE tickets (
-                         id SERIAL PRIMARY KEY,
-                         user_id INT REFERENCES users(id),
-                         company_id INT REFERENCES companies(id),
-                         description TEXT NOT NULL,
-                         status VARCHAR(50) NOT NULL,
-                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- Create the 'permissions' table
+CREATE TABLE permissions (
+                             id SERIAL PRIMARY KEY,
+                             role_id INT REFERENCES roles(id),
+                             permission VARCHAR(255) NOT NULL
 );
 
--- Insert sample data into tickets table
-INSERT INTO tickets (user_id, company_id, description, status) VALUES (1, 1, 'Issue with product', 'open');
-INSERT INTO tickets (user_id, company_id, description, status) VALUES (2, 2, 'Billing issue', 'open');
+-- Utility function to hash password (Assuming pgcrypto extension is enabled)
+CREATE OR REPLACE FUNCTION hash_password(password TEXT) RETURNS TEXT AS $$
+BEGIN
+RETURN crypt(password, gen_salt('bf'));
+END;
+$$ LANGUAGE plpgsql;
 
--- Create payments table
-CREATE TABLE payments (
-                          id SERIAL PRIMARY KEY,
-                          ticket_id INT REFERENCES tickets(id),
-                          amount NUMERIC(10, 2) NOT NULL,
-                          status VARCHAR(50) NOT NULL,
-                          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- Insert default SuperAdmin User
+INSERT INTO users (username, password_hash, email, role) VALUES (
+                                                                    'superadmin',
+                                                                    hash_password('SuperAdminPassword'),  -- Replace 'SuperAdminPassword' with a strong password
+                                                                    'superadmin@example.com',
+                                                                    'SuperAdmin'
+                                                                );
 
--- Insert sample data into payments table
-INSERT INTO payments (ticket_id, amount, status) VALUES (1, 100.00, 'completed');
-INSERT INTO payments (ticket_id, amount, status) VALUES (2, 50.00, 'pending');
+-- Example of assigning some permissions to the SuperAdmin role
+INSERT INTO permissions (role_id, permission) SELECT id, 'auth:auth:create' FROM roles WHERE role_name = 'SuperAdmin';
+INSERT INTO permissions (role_id, permission) SELECT id, 'auth:auth:read' FROM roles WHERE role_name = 'SuperAdmin';
+INSERT INTO permissions (role_id, permission) SELECT id, 'company:profile:create' FROM roles WHERE role_name = 'SuperAdmin';
+-- Add more permissions as needed...
 
--- Create statistics table
-CREATE TABLE statistics (
-                            id SERIAL PRIMARY KEY,
-                            user_id INT REFERENCES users(id),
-                            data JSONB,
-                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- Ensure to grant the SuperAdmin all necessary permissions as per the previous role-based permissions list.
 
--- Insert sample data into statistics table
-INSERT INTO statistics (user_id, data) VALUES (1, '{"ticketsCreated": 5, "paymentsMade": 3}');
-INSERT INTO statistics (user_id, data) VALUES (2, '{"ticketsCreated": 2, "paymentsMade": 1}');
+-- Add more role-based permissions insertion as needed...

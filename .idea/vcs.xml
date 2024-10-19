@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/backend-services/api-gateway" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/backend-services/microservices/auth-service" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/backend-services/microservices/company-service" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/backend-services/microservices/manager-service" vcs="Git" />

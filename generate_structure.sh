@@ -3,7 +3,7 @@
 # Function to create a NestJS service
 create_nestjs_service() {
   local service_name=$1
-  local service_dir=backend-services/microservices/$service_name
+local service_dir=${2:-backend-services/microservices/$service_name}
 
   # Create NestJS project
   nest new $service_name --directory $service_dir --package-manager yarn
@@ -82,26 +82,38 @@ create_angular_app() {
 }
 
 # Create necessary directories
-mkdir -p frontend-apps
+#mkdir -p frontend-apps
+
+# Create api-gateway
+#create_nestjs_service "api-gateway" "backend-services/api-gateway"
 
 # Create services
-create_nestjs_service "auth-service"
-create_spring_service "payments-service"
-create_nestjs_service "company-service"
-create_nestjs_service "manager-service"
-create_nestjs_service "tickets-service"
-create_nestjs_service "verification-service"
-create_nestjs_service "support-service"
-create_nestjs_service "statistic-service"
+#create_nestjs_service "auth-service"
+#create_spring_service "payments-service"
+#create_nestjs_service "company-service"
+#create_nestjs_service "manager-service"
+#create_nestjs_service "tickets-service"
+#create_nestjs_service "verification-service"
+#create_nestjs_service "support-service"
+#create_nestjs_service "statistic-service"
 
 # Create front-end apps
-create_angular_app "admin-app"
-create_angular_app "client-app"
+#create_angular_app "admin-app"
+#create_angular_app "client-app"
 
 # Create directories for databases
-mkdir -p databases/{postgresql,mongodb}
+#mkdir -p databases/{postgresql,mongodb}
 
 # Create RabbitMQ directory
-mkdir -p message-broker/rabbitmq
+#mkdir -p message-broker/rabbitmq
 
 echo "Structure generated successfully."
+
+#git submodule add https://github.com/MaksymKrychinin/tc-company-service.git backend-services/microservices/company-service
+#git submodule add https://github.com/MaksymKrychinin/tc-manager-service.git backend-services/microservices/manager-service
+#git submodule add https://github.com/MaksymKrychinin/tc-statistic-service.git backend-services/microservices/statistic-service
+#git submodule add https://github.com/MaksymKrychinin/tc-support-service.git backend-services/microservices/support-service
+#git submodule add https://github.com/MaksymKrychinin/tc-tickets-service.git backend-services/microservices/tickets-service
+#git submodule add https://github.com/MaksymKrychinin/tc-verification-service.git backend-services/microservices/verification-service
+#
+#git add .gitmodules backend-services/microservices/company-service backend-services/microservices/manager-service backend-services/microservices/statistic-service backend-services/microservices/support-service backend-services/microservices/tickets-service backend-services/microservices/verification-service
